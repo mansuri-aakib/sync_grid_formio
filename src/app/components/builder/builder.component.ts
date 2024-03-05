@@ -24,25 +24,23 @@ export class BuilderComponent {
   }
 
   onChange(event:any): void {
-    if(event.type === 'addComponent')
+    if(event.type === 'updateComponent' && event.component.type === "syncgrid")
     {
-      setTimeout(() => {
-        const els = document.querySelectorAll(
-          'div[style*="background-color: rgba(0, 0, 0, 0.5)"]'
-        );
-        els.forEach((e) => {
-          e.remove();
-        });
-      }, 2000);
-  
-      setTimeout(() => {
-          const els = document.querySelectorAll(
-              'div[style*="z-index: 999999999"]'
-          );
-          els.forEach((e) => {
-              e.remove();
-          });
-      }, 2000);
+      document
+      .querySelectorAll(
+        'div[style*="background-color: rgba(0, 0, 0, 0.5)"]'
+      )
+      .forEach((e) => {
+        e.remove();
+      });
+
+      document
+      .querySelectorAll(
+        'div[style*="z-index: 999999999"]'
+      )
+      .forEach((e) => {
+        e.remove();
+      });
     }
   }
 
