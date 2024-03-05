@@ -11,7 +11,7 @@ import { NgFor } from "@angular/common";
 })
 export class EmpTab implements FormioCustomComponent<number>{
     public data:any;
-    
+
     constructor(){
        this.data = dataSource;
     }

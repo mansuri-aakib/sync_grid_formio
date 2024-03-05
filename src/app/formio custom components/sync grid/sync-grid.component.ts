@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { GridModule, RowSelectEventArgs, SelectionSettingsModel } from "@syncfusion/ej2-angular-grids";
-import dataSource from "./dataSource";
 import { FormioCustomComponent } from "../../fomio helper/elements.common";
+import dataSource from "./dataSource";
 
 @Component({
     selector:'sync-grid_old',
@@ -21,7 +21,7 @@ export class SyncGrid implements FormioCustomComponent<number>{
   
     @Input()
     disabled!: boolean;
-
+        
     rowSelected(args: RowSelectEventArgs): void {
         alert(`selected data: ${JSON.stringify(args.data)}`);
     }
