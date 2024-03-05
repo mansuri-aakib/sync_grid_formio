@@ -1,7 +1,8 @@
 export default {
+    sanitize:true,
     sanitizeConfig: {
-      allowedTags: ['sync-grid'],
-      addTags: ['sync-grid']
+      allowedTags: ['sync-grid','emp-tab'],
+      addTags: ['sync-grid','emp-tab']
     },
     
     builder:{
