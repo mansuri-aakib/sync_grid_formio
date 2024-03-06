@@ -10,12 +10,13 @@ import { SharedModule } from '../../shared.module';
   styleUrl: './renderer.component.css'
 })
 export class RendererComponent implements OnInit {
-  public formTemplates!: FormioForm[];
+  public formTemplates!: FormioForm[];// Array containing form templates retrieved from localstorage.
   public selectedTemplate!: any;
   public submitedTemplate!: {};
   public isTemplateSelected: boolean = false;
   public isDataSubmited: boolean = false;
 
+  //load data from local
   ngOnInit(): void {
     let existingData = localStorage.getItem('FormsJson');
     if (existingData !== null) {
@@ -23,6 +24,13 @@ export class RendererComponent implements OnInit {
     }
   }
 
+  /**
+   * Renders the selected template based on the event value.
+   * - If the value is -1, sets the isTemplateSelected flag to false.
+   * - Otherwise, sets the isTemplateSelected flag to true, resets the isDataSubmited flag,
+   *   and renders the selected template using Formio.createForm.
+   * @param event The event object containing the target value.
+  */
   renderTemplate(event: any) {
     if (event.target.value == -1) {
       this.isTemplateSelected = false;
@@ -47,6 +55,7 @@ export class RendererComponent implements OnInit {
   }
 
   onChange(): void {
+    // Removing Syncfusion premium dialog
     document
       .querySelectorAll(
         'div[style*="background-color: rgba(0, 0, 0, 0.5)"]'
@@ -65,6 +74,12 @@ export class RendererComponent implements OnInit {
 
   }
   
+  /**
+   * Handles form submission.
+   * - Sets the isDataSubmited flag to true.
+   * - Stores the submitted form data.
+   * @param formJson The JSON object containing the submitted form data.
+   */
   onSubmitForm(formJson: any) {
     this.isDataSubmited = true;
     this.submitedTemplate = formJson.data;

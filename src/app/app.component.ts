@@ -13,7 +13,10 @@ import { registerEmpTableComponent } from './formio custom components/emp table/
 export class AppComponent {
   title = 'sync-grid-old';
   constructor(injector:Injector){
+    // Registers the SyncGridNewComponent using the provided Injector.
     registerSyncGridComponent(injector);
+
+    // Registers the EmpTabComponent using the provided Injector.
     registerEmpTableComponent(injector);
   }
 }
