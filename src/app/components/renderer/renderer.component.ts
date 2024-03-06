@@ -37,14 +37,34 @@ export class RendererComponent implements OnInit {
         {
           sanitize: true,
           sanitizeConfig: {
-            allowedTags: ['sync-grid','emp-tab'],
-            addTags: ['sync-grid','emp-tab']
+            allowedTags: ['sync-grid', 'emp-tab'],
+            addTags: ['sync-grid', 'emp-tab']
           }
         }
       );
+      this.onChange()
     }
   }
 
+  onChange(): void {
+    document
+      .querySelectorAll(
+        'div[style*="background-color: rgba(0, 0, 0, 0.5)"]'
+      )
+      .forEach((e) => {
+        e.remove();
+      });
+
+    document
+      .querySelectorAll(
+        'div[style*="z-index: 999999999"]'
+      )
+      .forEach((e) => {
+        e.remove();
+      });
+
+  }
+  
   onSubmitForm(formJson: any) {
     this.isDataSubmited = true;
     this.submitedTemplate = formJson.data;
