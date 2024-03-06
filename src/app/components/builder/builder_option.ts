@@ -8,7 +8,9 @@ export default {
     builder:{
       basic:{
         default: false,
-        weight: 1
+        weight: 1,
+        components:{textarea:false}
+        
       },
       custom:{
         title:'Custom Components',

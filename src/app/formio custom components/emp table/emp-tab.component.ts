@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { FormioCustomComponent } from "../../fomio helper/elements.common";
+import { Component } from "@angular/core";
 import dataSource from "./dataSource";
 import { NgFor } from "@angular/common";
 
@@ -9,19 +8,10 @@ import { NgFor } from "@angular/common";
     standalone:true,
     imports:[NgFor]
 })
-export class EmpTab implements FormioCustomComponent<number>{
+export class EmpTab{
     public data:any;
 
     constructor(){
        this.data = dataSource;
     }
-
-    @Input()
-    value!: number;
-  
-    @Output()
-    valueChange = new EventEmitter<number>();
-  
-    @Input()
-    disabled!: boolean;
 }

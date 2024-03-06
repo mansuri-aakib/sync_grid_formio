@@ -23,24 +23,23 @@ export class BuilderComponent {
     this.builderOption = builder_option;
   }
 
-  onChange(event:any): void {
-    if(event.type === 'updateComponent' && event.component.type === "syncgrid")
-    {
+  onChange(event: any): void {
+    if (event.type === 'updateComponent' && event.component.type === "syncgrid") {
       document
-      .querySelectorAll(
-        'div[style*="background-color: rgba(0, 0, 0, 0.5)"]'
-      )
-      .forEach((e) => {
-        e.remove();
-      });
+        .querySelectorAll(
+          'div[style*="background-color: rgba(0, 0, 0, 0.5)"]'
+        )
+        .forEach((e) => {
+          e.remove();
+        });
 
       document
-      .querySelectorAll(
-        'div[style*="z-index: 999999999"]'
-      )
-      .forEach((e) => {
-        e.remove();
-      });
+        .querySelectorAll(
+          'div[style*="z-index: 999999999"]'
+        )
+        .forEach((e) => {
+          e.remove();
+        });
     }
   }
 

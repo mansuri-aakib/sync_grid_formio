@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { GridModule, RowSelectEventArgs, SelectionSettingsModel } from "@syncfusion/ej2-angular-grids";
-import { FormioCustomComponent } from "../../fomio helper/elements.common";
-import dataSource from "./dataSource";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
     selector:'sync-grid_old',
@@ -9,19 +8,18 @@ import dataSource from "./dataSource";
     standalone:true,
     imports:[GridModule]
 })
-export class SyncGrid implements FormioCustomComponent<number>{
-    public data = dataSource;
+export class SyncGrid {
+    public data:any;
     public selectionOptions?: SelectionSettingsModel = { mode: 'Row',  type: 'Single' };
+    public client:HttpClient = inject(HttpClient);
+    public url='https://dummyjson.com/products';
 
-    @Input()
-    value!: number;
-  
-    @Output()
-    valueChange = new EventEmitter<number>();
-  
-    @Input()
-    disabled!: boolean;
-        
+    constructor(){
+        this.client.get(this.url).subscribe((res:any)=>{
+            this.data=res.products
+        });
+    }
+    
     rowSelected(args: RowSelectEventArgs): void {
         alert(`selected data: ${JSON.stringify(args.data)}`);
     }

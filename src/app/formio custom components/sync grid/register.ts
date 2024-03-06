@@ -1,16 +1,46 @@
 import { Injector } from '@angular/core';
-import { FormioCustomComponentInfo } from '../../fomio helper/elements.common';
-import { registerCustomFormioComponent } from '../../fomio helper/register-custom-component';
 import { SyncGrid } from './sync-grid.component';
-
-const COMPONENT_OPTIONS: FormioCustomComponentInfo = {
-  type: 'syncgrid',
-  selector: 'sync-grid',
-  title: 'Sync Grid',
-  group: 'custom',
-  icon: 'table',
-};
+import { Components } from 'formiojs';
+import { createCustomElement } from '@angular/elements';
 
 export function registerSyncGridComponent(injector: Injector) {
-  registerCustomFormioComponent(COMPONENT_OPTIONS, SyncGrid, injector);
+  customElements.define('sync-grid', createCustomElement(SyncGrid, { injector }));
+  Components.setComponent('syncgrid', createCustomFormioComponent());
+}
+
+function createCustomFormioComponent() {
+  const BaseComponent = Components.components.input;
+
+  return class CustomComponent extends BaseComponent {
+    static override schema() {
+      return super.schema({
+        type: 'syncgrid',
+        key: 'syncGrid',
+        selector: 'sync-grid',
+      });
+    }
+
+    static get builderInfo() {
+      return {
+        title: 'Sync Grid',
+        icon: 'table',
+        group: 'custom',
+        schema: this.schema()
+      };
+    }
+
+    override elementInfo() {
+      const info = super.elementInfo();
+      info.type = 'sync-grid';
+      return info;
+    }
+
+    override renderElement() {
+      const info = this.elementInfo();
+      return this.renderTemplate('input', {
+        input: info
+      });
+    }
+
+  };
 }
